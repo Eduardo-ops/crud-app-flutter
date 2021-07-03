@@ -1,4 +1,5 @@
 import 'package:cadastro_usuario/models/user.dart';
+import 'package:cadastro_usuario/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class UserDetails extends StatelessWidget {
@@ -22,7 +23,14 @@ class UserDetails extends StatelessWidget {
         child: Row(
           children: <Widget>[
             IconButton(
-                icon: Icon(Icons.edit), color: Colors.orange, onPressed: () {}),
+                icon: Icon(Icons.edit),
+                color: Colors.orange,
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    AppRoutes.USER_FORM,
+                    arguments: user,
+                  );
+                }),
             IconButton(
                 icon: Icon(Icons.delete), color: Colors.red, onPressed: () {})
           ],
