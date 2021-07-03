@@ -1,4 +1,5 @@
 import 'package:cadastro_usuario/provider/users.dart';
+import 'package:cadastro_usuario/routes/app_routes.dart';
 import 'package:cadastro_usuario/views/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Cadastro de Usuários',
         home: UserList(),
+        routes: {
+          /* AppRoutes.USER_FORM: */
+        },
       ),
     );
   }
