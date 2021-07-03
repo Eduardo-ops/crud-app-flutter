@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Cadastro de Usuários',
         routes: {
-          AppRoutes.HOME: (ct) => UserList(),
-          AppRoutes.USER_FORM: (ct) => UserForm(),
+          AppRoutes.HOME: (_) => UserList(),
+          AppRoutes.USER_FORM: (_) => UserForm(),
         },
       ),
     );

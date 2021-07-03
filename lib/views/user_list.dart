@@ -21,6 +21,11 @@ class UserList extends StatelessWidget {
               icon: Icon(Icons.add),
               onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
+                /* users.createUser(
+                    User(name: 'teste', email: 'teste@hotmail.com', photo: '')); */
+                /* users.updateUser(
+                    User(id: '1', name: 'teste', email: 'teste@', photo: '')); */
+                /* users.removeUser(users.byIndex(0)); */
               })
         ],
       ),

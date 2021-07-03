@@ -12,7 +12,6 @@ class UserProvider with ChangeNotifier {
     if (user == null) {
       return;
     }
-
     final id = Random().nextDouble().toString();
     _itens.putIfAbsent(
         id,
@@ -40,6 +39,10 @@ class UserProvider with ChangeNotifier {
   // GET
   int get count {
     return _itens.length;
+  }
+
+  User byIndex(int i) {
+    return _itens.values.elementAt(i);
   }
 
   // DELETE
