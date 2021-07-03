@@ -14,7 +14,6 @@ class UserDetails extends StatelessWidget {
             backgroundImage: NetworkImage(user.photo),
           );
     return ListTile(
-      leading: photo,
-    );
+        leading: photo, title: Text(user.name), subtitle: Text(user.email));
   }
 }
