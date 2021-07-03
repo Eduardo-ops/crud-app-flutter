@@ -14,6 +14,7 @@ class UserList extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: <Widget>[IconButton(icon: Icon(Icons.add), onPressed: () {})],
       ),
       body: ListView.builder(
         itemCount: users.length,
