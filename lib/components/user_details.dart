@@ -8,6 +8,13 @@ class UserDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile();
+    final photo = user.photo == null || user.photo.isEmpty
+        ? CircleAvatar(child: Icon(Icons.person))
+        : CircleAvatar(
+            backgroundImage: NetworkImage(user.photo),
+          );
+    return ListTile(
+      leading: photo,
+    );
   }
 }
