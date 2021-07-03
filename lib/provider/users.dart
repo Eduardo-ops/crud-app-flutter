@@ -43,5 +43,10 @@ class UserProvider with ChangeNotifier {
   }
 
   // DELETE
-
+  void removeUser(User user) {
+    if (user != null && user.id != null) {
+      _itens.remove(user.id);
+    }
+    notifyListeners();
+  }
 }
