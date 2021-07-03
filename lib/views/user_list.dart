@@ -1,11 +1,12 @@
 import 'package:cadastro_usuario/components/user_details.dart';
-import 'package:cadastro_usuario/data/dummy_users.dart';
+import 'package:cadastro_usuario/provider/users.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final users = {...DUMMY_USERS};
+    final UserProvider users = Provider.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -17,8 +18,8 @@ class UserList extends StatelessWidget {
         actions: <Widget>[IconButton(icon: Icon(Icons.add), onPressed: () {})],
       ),
       body: ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (ct, i) => UserDetails(users.values.elementAt(i)),
+        itemCount: users.count,
+        itemBuilder: (ct, i) => UserDetails(users.all.elementAt(i)),
       ),
     );
   }
