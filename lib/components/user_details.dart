@@ -1,6 +1,8 @@
 import 'package:cadastro_usuario/models/user.dart';
+import 'package:cadastro_usuario/provider/users.dart';
 import 'package:cadastro_usuario/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserDetails extends StatelessWidget {
   final User user;
@@ -32,7 +34,35 @@ class UserDetails extends StatelessWidget {
                   );
                 }),
             IconButton(
-                icon: Icon(Icons.delete), color: Colors.red, onPressed: () {})
+                icon: Icon(Icons.delete),
+                color: Colors.red,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (ct) => AlertDialog(
+                      title: Text('Excluir usuário'),
+                      content: Text('certeza de exclusão???'),
+                      actions: <Widget>[
+                        FlatButton(
+                            child: Text('Não'),
+                            onPressed: () => {
+                                  Navigator.of(context).pop(false),
+                                }),
+                        FlatButton(
+                          child: Text('Sim'),
+                          onPressed: () => {
+                            Navigator.of(context).pop(true),
+                          },
+                        )
+                      ],
+                    ),
+                  ).then((confirmed) {
+                    if (confirmed) {
+                      Provider.of<UserProvider>(context, listen: false)
+                          .removeUser(user);
+                    }
+                  });
+                })
           ],
         ),
       ),
