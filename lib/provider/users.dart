@@ -19,46 +19,47 @@ class UserProvider with ChangeNotifier {
       return;
     }
 
-    final response = await http.post(
-      Uri.parse(
-        "$_dateUrl/users.json",
-      ),
-      body: json.encode(
-          {'name': user.name, 'email': user.email, 'photo': user.photo}),
-    );
+    if (user.id != null &&
+        user.id.trim().isNotEmpty &&
+        _itens.containsKey(user.id)) {
+      updateUser(user);
+    } else {
+      final response = await http.post(
+        Uri.parse(
+          "$_dateUrl/users.json",
+        ),
+        body: json.encode(
+            {'name': user.name, 'email': user.email, 'photo': user.photo}),
+      );
 
-    final id = json.decode(response.body)['name'];
-    _itens.putIfAbsent(
-        id,
-        () => User(
-            id: id, name: user.name, email: user.email, photo: user.photo));
-    notifyListeners();
+      final id = json.decode(response.body)['name'];
+      _itens.putIfAbsent(
+          id,
+          () => User(
+              id: id, name: user.name, email: user.email, photo: user.photo));
+      notifyListeners();
+    }
   }
 
   // UPDATE
   Future<void> updateUser(User user) async {
-    if (user.id != null &&
-        user.id.trim().isNotEmpty &&
-        _itens.containsKey(user.id)) {
-      final response = await http.patch(
-          Uri.parse("$_dateUrl/users/${user.id}.json"),
-          body: json.encode(
-              {'name': user.name, 'email': user.email, 'photo': user.photo}));
-      _itens.update(user.id,
-          (_) => User(name: user.name, email: user.email, photo: user.photo));
-    }
+    final response = await http.patch(
+        Uri.parse("$_dateUrl/users/${user.id}.json"),
+        body: json.encode(
+            {'name': user.name, 'email': user.email, 'photo': user.photo}));
+    _itens.update(user.id,
+        (_) => User(name: user.name, email: user.email, photo: user.photo));
+
     notifyListeners();
   }
 
   // READ
-  /* Future<void> all(User user) async {
-    final response = await http.read(
-      Uri.parse("$_dateUrl/users/${user.id}.json"),
-    );
-  } */
-
   List<User> get all {
     return [..._itens.values];
+  }
+
+  User byIndex(int i) {
+    return _itens.values.elementAt(i);
   }
 
   int get count {
